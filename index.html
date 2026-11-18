@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kansas City Employment Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page" id="app">
+  <header class="head">
+    <div class="titlerow">
+      <h1>Visualizing employment in the Kansas City metro area</h1>
+      <a class="brand" href="https://thekceconomy.substack.com/" target="_blank" rel="noopener"><span>The KC Economy</span><img src="kc-logo.png" alt="" width="48" height="48"></a>
+    </div>
+    <div class="sub" id="sub">Employment and wages by employer industry from the U.S. Bureau of Labor Statistics, Quarterly Census of Employment and Wages</div>
+  </header>
+
+  <section class="controls" aria-label="Chart controls">
+    <div class="field" id="measure-f">Measure
+      <div class="seg" id="measure" role="group" aria-label="Measure">
+        <button type="button" data-m="emp" aria-pressed="true">Jobs</button>
+        <button type="button" data-m="estabs" aria-pressed="false">Establishments</button>
+        <button type="button" data-m="wages" aria-pressed="false">Total wages</button>
+      </div>
+    </div>
+    <label class="field">Geography<select id="area"></select></label>
+    <button type="button" class="linkbtn" id="reset">Reset view</button>
+  </section>
+
+  <nav class="crumbs" id="crumbs" aria-label="Current view"></nav>
+
+  <div class="main">
+    <section class="card chart-card" aria-label="Chart">
+      <div>
+        <h2 id="ctitle"></h2>
+      </div>
+      <p class="hint-line chart-only" id="hint">Click a bar to see additional details. Click again to close it.</p>
+      <div class="chart-wrap chart-only" id="chartwrap"><svg id="chart" role="group" aria-label="Flow chart of jobs by industry. The same values are available in the table view."></svg></div>
+      <div class="table-wrap" id="tablewrap" hidden></div>
+      <div class="legend">
+        <span class="chart-only"><span class="sw private"></span>Private</span>
+        <span class="chart-only"><span class="sw gov"></span>Government</span>
+        <span class="chart-only"><span class="sw other"></span>Grouped smaller items</span>
+        <span class="chart-only"><span class="sw nd"></span>Not disclosed</span>
+        <span class="tools"><button type="button" class="linkbtn chart-only" id="copyImg">Copy image</button><button type="button" class="linkbtn chart-only" id="toggleView">View as table</button><button type="button" class="linkbtn" id="csv">Download CSV</button></span>
+      </div>
+    </section>
+    <aside class="card panel" id="panel" aria-label="Details of the selected item"></aside>
+  </div>
+
+  <footer class="foot">
+    <p>Source: U.S. Bureau of Labor Statistics, <a href="https://www.bls.gov/cew/">Quarterly Census of Employment and Wages</a> (QCEW), covered employment under state unemployment insurance programs. "Jobs" is the average of the quarter's three monthly employment counts. Total wages are annualized by multiplying the quarter's wages by four; average weekly wage is based on the quarter's wages and jobs.</p>
+    <p>To protect employer confidentiality, BLS withholds some figures. Where a county's figure was withheld, the metro value is shown as "at least" (≥) and the gap appears as "Not disclosed". Small categories are grouped into "Other" to keep the chart readable.</p>
+    <p>Calculations and graphics by Brian Werner, <a href="https://thekceconomy.substack.com/" target="_blank" rel="noopener">https://thekceconomy.substack.com/</a>. <span id="foot-built"></span></p>
+  </footer>
+  <div class="status" id="status" role="status" aria-live="polite"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
